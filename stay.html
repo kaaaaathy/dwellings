@@ -1,41 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital@0;1&display=swap" rel="stylesheet">
 
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 
-  </head>
-  <body class = "black" style="text-align:center;">
-    <p id ="startCaption">[sound on]</p>
+<body style="color:white;background:black">
 
-    <section id ="start"></section>
+  <div id="container ">
+    <p id="text">
 
-    <audio style = "display:none" controls preload="auto" id = "clink" loop>
-        <source src="klink.mp3" />
-      </audio>
+    </p>
+  </div>
 
-  </body>
-  <script>
-    let sound = document.getElementById('clink');
-    let go = document.getElementById('start');
-    let goCaption = document.getElementById('startCaption');
+  <p id="startCaption">[sound on]</p>
 
-    let delay = 1400;
-    let started = false;
+  <section id="start"></section>
 
-    document.addEventListener('mouseover',function(){
-      if (started == false){
+  <audio style="display:none" controls preload="auto" id="clink" loop>
+    <source src="" />
+  </audio>
+
+</body>
+<script>
+  let sound = document.getElementById('clink');
+  let go = document.getElementById('start');
+  let goCaption = document.getElementById('startCaption');
+  let started = false;
+
+  document.addEventListener('mouseover', function () {
+    if (started == false) {
       started = true;
-      go.innerHTML = "<iframe src = 'names.html'></iframe><iframe src = 'pics.html'></iframe><iframe src = 'poem.html'></iframe>"
-          setTimeout(()=>{
-              sound.play();
-              goCaption.classList.add("fade");
-          },delay);
-      }
+      setTimeout(() => {
+        sound.play();
+        goCaption.classList.add("fade");
+      }, delay);
+    }
+  });
+
+  //resize code
+  let cont = document.getElementById('container');
+  cont.style.height = window.innerHeight + "px";
+  window.addEventListener('resize', function () {
+    cont.style.height = window.innerHeight + "px";
+  });
+
+  //animate
+
+  let allText;
+  let p = document.getElementById('text');
+
+  let speed = 1400;
+  let delay = 2800;
+
+
+  let winWidth;
+
+  fetch("text.txt")
+    .then(response => response.text())
+    .then(data => {
+      allText = data.split(/\W/);
+      play(allText);
+
     });
 
-  </script>
+  async function play(array) {
+    await wait(delay);
+    await animate(array);
+  }
+
+  async function animate(array) {
+    let time;
+    for (let i = 0; i < array.length; i++) {
+      //this used to be a for loop in the window but it was glitchin
+      await wait(speed);
+      setText(array[i]);
+    }
+    await animate(array);
+  }
+
+  function setText(word) {
+    winWidth = window.innerWidth;
+    p.innerHTML = word;
+    if (word.length > 3) {
+      p.style.fontSize = winWidth / word.length + "px";
+    }
+  }
+
+  function wait(time) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve('resolved');
+      }, time);
+    });
+  }
+  cont.style.height = window.innerHeight + "px";
+
+  window.addEventListener('resize', function () {
+    winWidth = window.innerWidth;
+    cont.style.height = window.innerHeight + "px";
+  });
+
+</script>
+
 </html>
