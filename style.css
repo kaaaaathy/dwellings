@@ -1,20 +1,32 @@
 /* CSS files add styling rules to your content */
 
 @font-face {
-  font-family: 'FT88';
+  font-family: 'cps';
   /* set name */
-  src: url('FT88-Italic.otf');
+  src: url('courier-prime-sans.ttf');
   /* url of the font */
 }
 
 
+#window {
+  background: transparent;
+  width: 75%;
+  height: 250px;
+  border-radius: 4px;
+  opacity: 0;
+  border: 0.5px dotted gray;
+  /* width: 100%;
+  height: 100%; */
+  margin: auto;
+  position: fixed;
+  background-size: cover;
+}
 
 body {
-  font-family: monospace;
-  font-style: italic;
+  font-family: 'cps', monospace;
+
+  /* font-style: italic; */
   text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 100px;
   background-size: auto;
   background-position: center;
   background-repeat: no-repeat;
@@ -26,15 +38,19 @@ section {
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
-  padding-top: 200px;
+  padding: 200px 0px;
   width: 100%;
   margin: 0px auto;
 }
 
 #text {
-  font-size: 100px;
+  font-size: 120px;
   display: flex;
   align-items: center;
+  z-index: 100;
+  letter-spacing: 2px;
+  padding-top: 20px;
+
 }
 
 #container {
@@ -47,7 +63,7 @@ section {
   margin: auto;
 }
 
-#startCaption {
+/* #startCaption {
   font-size: 20px;
   text-transform: lowercase;
   font-style: italic;
@@ -55,7 +71,7 @@ section {
   top: 20px;
   width: 100%;
   text-align: center;
-}
+} */
 
 .fade {
   opacity: 0;

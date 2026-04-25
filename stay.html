@@ -14,6 +14,8 @@
     <p id="text">
 
     </p>
+    <div id="window"></div>
+
   </div>
 
   <!-- <p id="startCaption">[sound on]</p>
@@ -43,6 +45,8 @@
 
   //resize code
   let cont = document.getElementById('container');
+  let windowFrame = document.getElementById('window');
+
   cont.style.height = window.innerHeight + "px";
   window.addEventListener('resize', function () {
     cont.style.height = window.innerHeight + "px";
@@ -52,9 +56,10 @@
 
   let allText;
   let p = document.getElementById('text');
-
+  let images = ["light1.jpg", "light2.jpg", "light3.jpg", "light4.jpg", "light5.jpg"];
   let speed = 1000;
   let delay = 1000;
+  let i = 0;
 
 
   let winWidth;
@@ -76,11 +81,39 @@
     let time;
     for (let i = 0; i < array.length; i++) {
       //this used to be a for loop in the window but it was glitchin
-      await wait(speed);
       setText(array[i]);
+
+      if (array[i] == "") {
+        setBackground();
+        speed = 2000;
+
+      } else {
+        resetBackground();
+        speed = 1000;
+      }
+      await wait(speed);
     }
     await animate(array);
   }
+
+  function setBackground() {
+    windowFrame.style.backgroundImage = "url('JPEG/" + images[i] + "')";
+    windowFrame.style.opacity = "1";
+
+    if (i < images.length - 1) {
+      i++;
+    } else {
+      i = 0;
+    }
+    console.log(images[i])
+
+  }
+  function resetBackground() {
+    windowFrame.style.backgroundImage = "none";
+    windowFrame.style.opacity = "0";
+  }
+  //if there is a punctuation mark
+  //replace it with a random image
 
   function setText(word) {
     winWidth = window.innerWidth;
