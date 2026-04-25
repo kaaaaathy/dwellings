@@ -15,30 +15,30 @@
     </p>
   </div>
 
-  <p id="startCaption">[sound on]</p>
+  <!-- <p id="startCaption">[sound on]</p>
 
   <section id="start"></section>
 
   <audio style="display:none" controls preload="auto" id="clink" loop>
     <source src="" />
-  </audio>
+  </audio> -->
 
 </body>
 <script>
-  let sound = document.getElementById('clink');
-  let go = document.getElementById('start');
-  let goCaption = document.getElementById('startCaption');
-  let started = false;
+  // let sound = document.getElementById('clink');
+  // let go = document.getElementById('start');
+  // let goCaption = document.getElementById('startCaption');
+  // let started = false;
 
-  document.addEventListener('mouseover', function () {
-    if (started == false) {
-      started = true;
-      setTimeout(() => {
-        sound.play();
-        goCaption.classList.add("fade");
-      }, delay);
-    }
-  });
+  // document.addEventListener('mouseover', function () {
+  //   if (started == false) {
+  //     started = true;
+  //     setTimeout(() => {
+  //       sound.play();
+  //       goCaption.classList.add("fade");
+  //     }, delay);
+  //   }
+  // });
 
   //resize code
   let cont = document.getElementById('container');
@@ -52,16 +52,16 @@
   let allText;
   let p = document.getElementById('text');
 
-  let speed = 1400;
-  let delay = 2800;
+  let speed = 1000;
+  let delay = 1000;
 
 
   let winWidth;
 
-  fetch("text.txt")
+  fetch("leave.txt")
     .then(response => response.text())
     .then(data => {
-      allText = data.split(/\W/);
+      allText = data.split(" ");
       play(allText);
 
     });
